@@ -1,12 +1,13 @@
 import numpy as np
 import pyssht as ssht
-from pys2sleplet.utils.logger import logger
+
+from denoising.utils.logger import logger
 
 
 def apply_gaussian_smoothing(
     flm: np.ndarray, L: int, smoothing_factor: int
 ) -> np.ndarray:
-    """Applies Gaussian smoothing to the given signal.
+    """Applies Gaussian smoothing to the given signal
 
     Args:
         flm (np.ndarray): the initial harmonic coefficients of the signal

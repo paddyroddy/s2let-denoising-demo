@@ -3,8 +3,9 @@ from typing import Optional
 
 import numpy as np
 import pyssht as ssht
-from pys2sleplet.utils.smoothing import apply_gaussian_smoothing
 from scipy import io as sio
+
+from denoising.utils.smoothing import apply_gaussian_smoothing
 
 _file_location = Path(__file__).resolve()
 _matfile = _file_location.parent / "EGM2008_Topography_flms_L2190.mat"
@@ -43,10 +44,10 @@ def create_flm(L: int, smoothing: Optional[int] = None) -> np.ndarray:
 
 
 def _load_flm() -> np.ndarray:
-    """Reads in the MATLAB binary and converts it to numpy format.
+    """Reads in the MATLAB binary and converts it to numpy format
 
     Returns:
-        np.ndarray: the numpy array of harmonic coefficients.
+        np.ndarray: the numpy array of harmonic coefficients
     """
     mat_contents = sio.loadmat(str(_matfile))
     return np.ascontiguousarray(mat_contents["flm"][:, 0])
