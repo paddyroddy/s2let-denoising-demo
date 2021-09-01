@@ -76,7 +76,7 @@ class Plot:
         fig = Figure(data=data, layout=layout)
 
         # create html and open if auto_open is true
-        html_filename = str(_fig_path / "html" / f"{self.filename}.html")
+        html_filename = str(_fig_path / f"{self.filename}.html")
 
         py.plot(fig, filename=html_filename)
 
