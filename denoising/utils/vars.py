@@ -5,3 +5,4 @@ EARTH_BETA: float = np.deg2rad(108)
 EARTH_GAMMA: float = np.deg2rad(63)
 RANDOM_SEED: int = 30
 SAMPLING_SCHEME: str = "MWSS"
+UNSEEN: float = -1.56e30
