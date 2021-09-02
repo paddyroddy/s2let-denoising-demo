@@ -4,11 +4,6 @@ from matplotlib import colors
 
 from denoising_demo.utils.harmonic_methods import invert_flm_boosted
 from denoising_demo.utils.logger import logger
-from denoising_demo.utils.vars import (
-    EARTH_ALPHA,
-    EARTH_BETA,
-    EARTH_GAMMA,
-)
 
 
 def calc_plot_resolution(L: int) -> int:
@@ -48,13 +43,6 @@ def create_plot_type(field: np.ndarray, plot_type: str) -> np.ndarray:
         abs=np.abs(field), imag=field.imag, real=field.real, sum=field.real + field.imag
     )
     return plot_dict[plot_type]
-
-
-def rotate_earth_to_south_america(earth_flm: np.ndarray, L: int) -> np.ndarray:
-    """
-    rotates the flms of the Earth to a view centered on South America
-    """
-    return ssht.rotate_flms(earth_flm, EARTH_ALPHA, EARTH_BETA, EARTH_GAMMA, L)
 
 
 def boost_field(
