@@ -12,8 +12,8 @@ from denoising_demo.utils.wavelet_methods import (
 def test_axisymmetric_synthesis(
     earth_smoothed, axisymmetric_wavelets, axisymmetric_wavelet_coefficients_earth
 ) -> None:
-    """
-    tests that the axisymmetric wavelet synthesis recoveres the coefficients
+    """Tests that the axisymmetric wavelet synthesis recoveres
+    the signal
     """
     flm = axisymmetric_wavelet_inverse(
         L, axisymmetric_wavelet_coefficients_earth, axisymmetric_wavelets
@@ -22,9 +22,7 @@ def test_axisymmetric_synthesis(
 
 
 def test_create_kappas() -> None:
-    """
-    checks that the method creates the scaling function and wavelets
-    """
+    """Checks that the method creates the scaling function and wavelets"""
     wavelets = create_kappas(L ** 2, B, J_MIN)
     j_max = pys2let_j_max(B, L ** 2, J_MIN)
     assert_equal(j_max - J_MIN + 2, wavelets.shape[0])
