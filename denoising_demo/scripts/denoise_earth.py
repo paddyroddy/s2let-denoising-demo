@@ -17,7 +17,7 @@ SNR_IN = 10
 def main() -> None:
     """Performs a denoising akin to figure 5 of the S2LET paper"""
     # create initial smoothed Earth topography
-    earth_flm = create_flm(L, SMOOTHING)
+    earth_flm = create_flm(L, smoothing=SMOOTHING)
 
     # compute harmonic coefficients of the noise to create noised signal
     nlm = create_noise(L, earth_flm, SNR_IN)

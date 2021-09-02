@@ -1,6 +1,6 @@
-B = 2
-J_MIN = 0
-L = 16
-N_SIGMA = 3
-SMOOTHING = 2
-SNR_IN = 10
+B: int = 2
+J_MIN: int = 0
+L_SMALL: int = 16
+L_LARGE: int = 128
+N_SIGMA: int = 3
+SNR_IN: int = 10
