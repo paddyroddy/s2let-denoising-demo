@@ -1,6 +1,6 @@
 # s2let-denoising-demo
 
-This work aims to recreate figure 5 in [https://doi.org/10.1051/0004-6361/201220729].
+This work aims to recreate figure 5 in https://arxiv.org/abs/1211.1680.
 
 [![Tests](https://github.com/paddyroddy/s2let-denoising-demo/actions/workflows/deploy.yml/badge.svg)](https://github.com/paddyroddy/s2let-denoising-demo/actions/workflows/deploy.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
