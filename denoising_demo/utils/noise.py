@@ -119,10 +119,17 @@ def harmonic_hard_thresholding(
         np.ndarray: the thresholded wavelet coefficients
     """
     logger.info("begin harmonic hard thresholding")
+    # don't threshold the scaling function
     for j, coefficient in enumerate(wav_coeffs[1:]):
         logger.info(f"start Psi^{j + 1}/{len(wav_coeffs)-1}")
+
+        # convert to pixel space
         f = ssht.inverse(coefficient, L)
+
+        # threshold
         f_thresholded = _perform_hard_thresholding(f, sigma_j[j], n_sigma)
+
+        # convert back
         wav_coeffs[j + 1] = ssht.forward(f_thresholded, L)
     return wav_coeffs
 

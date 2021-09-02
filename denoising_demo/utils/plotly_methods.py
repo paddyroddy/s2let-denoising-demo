@@ -19,15 +19,28 @@ def create_camera(
     z_eye: float,
     zoom: float,
 ) -> Camera:
-    """
-    creates default camera view with a zoom factor
+    """Adjusts the position of the plotly camera
+
+    Args:
+        x_eye (float): x position
+        y_eye (float): y position
+        z_eye (float): z position
+        zoom (float): the level of zoom to apply
+
+    Returns:
+        Camera: a plotly camera object
     """
     return Camera(eye=Eye(x=x_eye / zoom, y=y_eye / zoom, z=z_eye / zoom))
 
 
 def create_layout(camera: Camera) -> Layout:
-    """
-    default plotly layout
+    """A default plotly layout
+
+    Args:
+        camera (Camera): plotly camera object
+
+    Returns:
+        Layout: a plotly layout object
     """
     return Layout(
         scene=Scene(
@@ -44,15 +57,26 @@ def create_layout(camera: Camera) -> Layout:
 
 
 def create_tick_mark(fmin: float, fmax: float) -> float:
-    """
-    creates tick mark to use when using a non-normalised plot
+    """Ensure the tick marks on the plot are the same distance apart
+
+    Args:
+        fmin (float): the minimum signal value
+        fmax (float): the maximum signal value
+
+    Returns:
+        float: the tick mark value to use
     """
     return max(abs(fmin), abs(fmax))
 
 
 def create_colour_bar(tick_mark: float) -> dict:
-    """
-    default plotly colour bar
+    """Creates a plotly colour bar
+
+    Args:
+        tick_mark (float): the value to set as min/max of bar
+
+    Returns:
+        dict: the resultant colour bar
     """
     return dict(
         x=0.93,

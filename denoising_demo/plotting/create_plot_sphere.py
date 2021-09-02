@@ -106,19 +106,20 @@ class Plot:
             the signal over the samples,
             the min and max values of the signal
         """
+        # handle this sampling scheme differently
         if method == "MW_pole":
             if len(f) == 2:
                 f, _ = f
             else:
                 f, _, _ = f
 
+        # generate samples
         thetas, phis = ssht.sample_positions(resolution, Grid=True, Method=method)
-
         if thetas.size != f.size:
             raise ValueError("Bandlimit L deos not match that of f")
 
+        # find colour range of plot
         f_plot = f.copy()
-
         f_max = f_plot.max()
         f_min = f_plot.min()
 
@@ -158,7 +159,6 @@ class Plot:
             if parametric
             else ssht.s2_to_cart(thetas, phis)
         )
-
         return x, y, z, f_plot, vmin, vmax
 
     def _prepare_field(self, f: np.ndarray) -> np.ndarray:
