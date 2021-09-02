@@ -31,7 +31,6 @@ class Plot:
     L: int
     filename: str
     plot_type: str = field(default="real", repr=False)
-    reality: bool = field(default=False, repr=False)
 
     def __post_init__(self) -> None:
         self.resolution = calc_plot_resolution(self.L)
@@ -43,10 +42,7 @@ class Plot:
         f = self._prepare_field(self.f)
 
         # get values from the setup
-        x, y, z, f_plot, vmin, vmax = self._setup_plot(
-            f,
-            self.resolution,
-        )
+        x, y, z, f_plot, vmin, vmax = self._setup_plot(f, self.resolution)
 
         # appropriate zoom in on north pole
         camera = create_camera(-0.1, -0.1, 10, 7.88)
@@ -54,6 +50,7 @@ class Plot:
         # pick largest tick max value
         tick_mark = create_tick_mark(vmin, vmax)
 
+        # create the plotly figure
         data = [
             Surface(
                 x=x,
@@ -68,14 +65,11 @@ class Plot:
                 reversescale=True,
             )
         ]
-
         layout = create_layout(camera)
-
         fig = Figure(data=data, layout=layout)
 
-        # create html and open if auto_open is true
+        # create html and plot offline
         html_filename = str(_fig_path / f"{self.filename}.html")
-
         py.plot(fig, filename=html_filename)
 
     @staticmethod
@@ -176,5 +170,5 @@ class Plot:
         Returns:
             np.ndarray: boosted and i.e. 'real' part of signal
         """
-        boosted_field = boost_field(f, self.L, self.resolution, reality=self.reality)
+        boosted_field = boost_field(f, self.L, self.resolution)
         return create_plot_type(boosted_field, self.plot_type)

@@ -42,10 +42,7 @@ def main() -> None:
     # produce three plots
     for name, flm in fields_dict.items():
         # convert to pixel space
-        field = ssht.inverse(
-            flm,
-            L,
-        )
+        field = ssht.inverse(flm, L)
 
         # perform plot
         Plot(field, L, name).execute()

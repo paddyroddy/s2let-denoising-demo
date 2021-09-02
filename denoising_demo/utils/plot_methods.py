@@ -42,20 +42,16 @@ def create_plot_type(field: np.ndarray, plot_type: str) -> np.ndarray:
     return plot_dict[plot_type]
 
 
-def boost_field(
-    field: np.ndarray, L: int, resolution: int, reality: bool = False
-) -> np.ndarray:
+def boost_field(field: np.ndarray, L: int, resolution: int) -> np.ndarray:
     """Takes an input field and boosts the resolution of it
 
     Args:
         field (np.ndarray): the pixel values of a signal
         L (int): bandlimit of the signal
         resolution (int): the desired resolution
-        reality (bool, optional): controls the reality of the signal.
-        Defaults to False.
 
     Returns:
         np.ndarray: [description]
     """
-    flm = ssht.forward(field, L, Reality=reality)
-    return invert_flm_boosted(flm, L, resolution, reality=reality)
+    flm = ssht.forward(field, L)
+    return invert_flm_boosted(flm, L, resolution)
