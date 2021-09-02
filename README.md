@@ -32,3 +32,9 @@ By default, running `demo` is like running
 ## pre-commit
 
 A series of hooks can be performed before committing with this simple step. This step is individual, however, and hence it is up to the user whether they want the strict checking. Execute `pip install -r requirements.txt; pre-commit install` to install git hooks in your `.git/` directory. Running `pre-commit run --all-files` will run over the whole repository.
+
+## plots
+
+The plots produced are performed with `plotly` and look like the following
+
+<img src="denoising_demo/figures/earth.png" width="200"/>
