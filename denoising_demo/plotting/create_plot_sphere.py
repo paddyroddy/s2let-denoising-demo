@@ -2,7 +2,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-import cmocean
 import numpy as np
 import plotly.offline as py
 import pyssht as ssht
@@ -12,7 +11,6 @@ from plotly.graph_objs.surface import Lighting
 from denoising_demo.utils.plot_methods import (
     boost_field,
     calc_plot_resolution,
-    convert_colourscale,
     create_plot_type,
 )
 from denoising_demo.utils.plotly_methods import (
@@ -66,7 +64,6 @@ class Plot:
                 cmid=0,
                 cmin=-tick_mark,
                 colorbar=create_colour_bar(tick_mark),
-                colorscale=convert_colourscale(cmocean.cm.ice),
                 lighting=Lighting(ambient=1),
                 reversescale=True,
             )

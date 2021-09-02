@@ -1,6 +1,5 @@
 import numpy as np
 import pyssht as ssht
-from matplotlib import colors
 
 from denoising_demo.utils.harmonic_methods import invert_flm_boosted
 from denoising_demo.utils.logger import logger
@@ -20,23 +19,15 @@ def calc_plot_resolution(L: int) -> int:
     return L
 
 
-def convert_colourscale(cmap: colors, pl_entries: int = 255) -> list[tuple[float, str]]:
-    """
-    converts cmocean colourscale to a plotly colourscale
-    """
-    h = 1 / (pl_entries - 1)
-    pl_colorscale = []
-
-    for k in range(pl_entries):
-        C = list(map(np.uint8, np.array(cmap(k * h)[:3]) * 255))
-        pl_colorscale.append((k * h, f"rgb{(C[0], C[1], C[2])}"))
-
-    return pl_colorscale
-
-
 def create_plot_type(field: np.ndarray, plot_type: str) -> np.ndarray:
-    """
-    gets the given plot type of the field
+    """Computes the appropriate value to plot
+
+    Args:
+        field (np.ndarray): pixel values of the signal
+        plot_type (str): one of abs/imag/real/sum
+
+    Returns:
+        np.ndarray: the resultant plot type of the signal
     """
     logger.info(f"plotting type: '{plot_type}'")
     plot_dict = dict(
