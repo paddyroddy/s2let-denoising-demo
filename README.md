@@ -37,4 +37,9 @@ A series of hooks can be performed before committing with this simple step. This
 
 The plots produced are performed with `plotly` and look like the following
 
-<img src="denoising_demo/figures/earth.png" width="200"/>
+<p>Earth</p>
+<img src="denoising_demo/figures/earth.png" width="400"/>
+<p>Noised Earth</p>
+<img src="denoising_demo/figures/noised_earth.png" width="400"/>
+<p>Denoised Earth</p>
+<img src="denoising_demo/figures/denoised_earth.png" width="400"/>
