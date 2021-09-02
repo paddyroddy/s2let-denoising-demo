@@ -10,7 +10,7 @@ from denoising_demo.utils.wavelet_methods import (
 
 
 def test_axisymmetric_synthesis(
-    axisymmetric_wavelets, axisymmetric_wavelet_coefficients_earth
+    earth_smoothed, axisymmetric_wavelets, axisymmetric_wavelet_coefficients_earth
 ) -> None:
     """
     tests that the axisymmetric wavelet synthesis recoveres the coefficients
@@ -18,9 +18,7 @@ def test_axisymmetric_synthesis(
     flm = axisymmetric_wavelet_inverse(
         L, axisymmetric_wavelet_coefficients_earth, axisymmetric_wavelets
     )
-    assert_allclose(
-        np.abs(flm - axisymmetric_wavelet_coefficients_earth).mean(), 0, atol=1e-13
-    )
+    assert_allclose(np.abs(flm - earth_smoothed).mean(), 0, atol=1e-13)
 
 
 def test_create_kappas() -> None:
