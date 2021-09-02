@@ -1,5 +1,4 @@
 import numpy as np
-import pyssht as ssht
 
 from denoising_demo.utils.noise import (
     compute_sigma_j,
@@ -38,7 +37,4 @@ def denoising_axisym(
     # compute SNR
     compute_snr(signal, flm - signal)
 
-    return ssht.inverse(
-        flm,
-        L,
-    )
+    return flm
