@@ -33,6 +33,7 @@ class Plot:
     plot_type: str = field(default="real", repr=False)
 
     def __post_init__(self) -> None:
+        self.filename += f"_{self.plot_type}"
         self.resolution = calc_plot_resolution(self.L)
 
     def execute(self) -> None:
