@@ -37,8 +37,8 @@ class Plot:
         self.resolution = calc_plot_resolution(self.L)
 
     def execute(self) -> None:
-        """
-        creates basic plotly plot rather than matplotlib
+        """Perfoms the plotly plot using a 3D surface
+        the plot will open in a browser as a HTML
         """
         f = self._prepare_field(self.f)
 
@@ -88,8 +88,29 @@ class Plot:
         parametric_scaling: list[float] = [0.0, 0.5],
         color_range: Optional[list[float]] = None,
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, float, float]:
-        """
-        function which creates the data for the matplotlib/plotly plot
+        """Computes the values necessary to perform plot
+
+        Args:
+            f (np.ndarray): pixel values of the signal
+            resolution (int): the desired resolution
+            method (str, optional): the sampling scheme. Defaults to "MW".
+            close (bool, optional): whether to close up the samples.
+            Defaults to True.
+            parametric (bool, optional): whether to plot the parametric
+            version. Defaults to False.
+            parametric_scaling (list[float], optional): scaling of the
+            parametric plot. Defaults to [0.0, 0.5].
+            color_range (Optional[list[float]], optional): control what range
+            of the plot to be seen on the colour bar values. Defaults to None.
+
+        Raises:
+            ValueError: checks the signal size matches the resolution
+
+        Returns:
+            tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, float, float]:
+            the x, y, z values of the samples in Cartesian space
+            the signal over the samples,
+            the min and max values of the signal
         """
         if method == "MW_pole":
             if len(f) == 2:
@@ -100,7 +121,7 @@ class Plot:
         thetas, phis = ssht.sample_positions(resolution, Grid=True, Method=method)
 
         if thetas.size != f.size:
-            raise Exception("Bandlimit L deos not match that of f")
+            raise ValueError("Bandlimit L deos not match that of f")
 
         f_plot = f.copy()
 
@@ -147,8 +168,13 @@ class Plot:
         return x, y, z, f_plot, vmin, vmax
 
     def _prepare_field(self, f: np.ndarray) -> np.ndarray:
-        """
-        boosts, forces plot type and then scales the field before plotting
+        """Boosts and calculates the plot type before plotting
+
+        Args:
+            f (np.ndarray): the pixel values of the signal
+
+        Returns:
+            np.ndarray: boosted and i.e. 'real' part of signal
         """
         boosted_field = boost_field(f, self.L, self.resolution, reality=self.reality)
         return create_plot_type(boosted_field, self.plot_type)

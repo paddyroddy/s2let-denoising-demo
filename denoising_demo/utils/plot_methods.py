@@ -6,9 +6,15 @@ from denoising_demo.utils.logger import logger
 
 
 def calc_plot_resolution(L: int) -> int:
+    """Calculates a suitable resolution for a given bandlimit
+
+    Args:
+        L (int): bandlimit of the signal
+
+    Returns:
+        int: the new bandlimit
     """
-    calculate appropriate resolution for given L
-    """
+    # found by manual tweaking
     res_dict = {1: 6, 2: 5, 3: 4, 7: 3, 9: 2, 10: 1}
 
     for log_bandlimit, exponent in res_dict.items():
@@ -39,12 +45,17 @@ def create_plot_type(field: np.ndarray, plot_type: str) -> np.ndarray:
 def boost_field(
     field: np.ndarray, L: int, resolution: int, reality: bool = False
 ) -> np.ndarray:
+    """Takes an input field and boosts the resolution of it
+
+    Args:
+        field (np.ndarray): the pixel values of a signal
+        L (int): bandlimit of the signal
+        resolution (int): the desired resolution
+        reality (bool, optional): controls the reality of the signal.
+        Defaults to False.
+
+    Returns:
+        np.ndarray: [description]
     """
-    inverts and then boosts the field before plotting
-    """
-    flm = ssht.forward(
-        field,
-        L,
-        Reality=reality,
-    )
+    flm = ssht.forward(field, L, Reality=reality)
     return invert_flm_boosted(flm, L, resolution, reality=reality)

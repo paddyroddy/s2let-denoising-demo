@@ -2,7 +2,7 @@ import pyssht as ssht
 
 from denoising_demo.data.create_earth_flm import create_flm
 from denoising_demo.plotting.create_plot_sphere import Plot
-from denoising_demo.utils.denoising import denoising_axisym
+from denoising_demo.utils.denoising import perform_denoising
 from denoising_demo.utils.noise import compute_snr, create_noise
 from denoising_demo.utils.wavelet_methods import create_axisymmetric_wavelets
 
@@ -28,7 +28,7 @@ def main() -> None:
     wavelets = create_axisymmetric_wavelets(L, B, J_MIN)
 
     # denoise Earth signal
-    denoised_earth_flm = denoising_axisym(
+    denoised_earth_flm = perform_denoising(
         L, earth_flm, noised_earth_flm, wavelets, SNR_IN, N_SIGMA
     )
 

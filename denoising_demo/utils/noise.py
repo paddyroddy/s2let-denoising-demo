@@ -88,8 +88,15 @@ def compute_sigma_noise(
 
 
 def compute_sigma_j(signal: np.ndarray, psi_j: np.ndarray, snr_in: int) -> np.ndarray:
-    """
-    compute sigma_j for wavelets used in denoising the signal
+    """Computes the wavlet noise standard deviation for each wavelet
+
+    Args:
+        signal (np.ndarray): the harmonic coefficients of the signal
+        psi_j (np.ndarray): the wavelets
+        snr_in (int): the level of noise
+
+    Returns:
+        np.ndarray: the sigma_j values for each wavelet
     """
     lm_axis = 1
     sigma_noise = compute_sigma_noise(signal, snr_in)
@@ -100,29 +107,39 @@ def compute_sigma_j(signal: np.ndarray, psi_j: np.ndarray, snr_in: int) -> np.nd
 def harmonic_hard_thresholding(
     L: int, wav_coeffs: np.ndarray, sigma_j: np.ndarray, n_sigma: int
 ) -> np.ndarray:
-    """
-    perform thresholding in harmonic space
+    """Thresholds the wavelet coefficients of the signal
+
+    Args:
+        L (int): bandlimit of the signal
+        wav_coeffs (np.ndarray): the input wavelet coefficients
+        sigma_j (np.ndarray): the noise level of each wavelet
+        n_sigma (int): the number of sigma to threshold
+
+    Returns:
+        np.ndarray: the thresholded wavelet coefficients
     """
     logger.info("begin harmonic hard thresholding")
     for j, coefficient in enumerate(wav_coeffs[1:]):
         logger.info(f"start Psi^{j + 1}/{len(wav_coeffs)-1}")
-        f = ssht.inverse(
-            coefficient,
-            L,
-        )
+        f = ssht.inverse(coefficient, L)
         f_thresholded = _perform_hard_thresholding(f, sigma_j[j], n_sigma)
-        wav_coeffs[j + 1] = ssht.forward(
-            f_thresholded,
-            L,
-        )
+        wav_coeffs[j + 1] = ssht.forward(f_thresholded, L)
     return wav_coeffs
 
 
 def _perform_hard_thresholding(
     f: np.ndarray, sigma_j: Union[float, np.ndarray], n_sigma: int
 ) -> np.ndarray:
-    """
-    set pixels in real space to zero if the magnitude is less than the threshold
+    """Set pixels in real space to zero if the magnitude is less than
+    the threshold
+
+    Args:
+        f (np.ndarray): the pixel values of the signal
+        sigma_j (Union[float, np.ndarray]): the noise level of each wavelet
+        n_sigma (int): number of sigma to threshold
+
+    Returns:
+        np.ndarray: the thresholded wavelt scale j
     """
     threshold = n_sigma * sigma_j
     return np.where(np.abs(f) < threshold, 0, f)

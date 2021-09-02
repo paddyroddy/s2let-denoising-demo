@@ -11,16 +11,26 @@ from denoising_demo.utils.wavelet_methods import (
 )
 
 
-def denoising_axisym(
+def perform_denoising(
     L: int,
     signal: np.ndarray,
     noised_signal: np.ndarray,
     axisymmetric_wavelets: np.ndarray,
     snr_in: int,
     n_sigma: int,
-) -> tuple[np.ndarray, float, float]:
-    """
-    reproduce the denoising demo from s2let paper
+) -> np.ndarray:
+    """Performs signal denoising through hard-thresholding
+
+    Args:
+        L (int): bandlimit of the signal
+        signal (np.ndarray): harmonic coefficients of signal
+        noised_signal (np.ndarray): noised harmonic coefficients of the signal
+        axisymmetric_wavelets (np.ndarray): the axisymmetric wavelets
+        snr_in (int): the desired level of noise
+        n_sigma (int): how many sigmas of noise to threshold
+
+    Returns:
+        np.ndarray: the denoised harmonic coefficients of the noised signal
     """
     # compute wavelet coefficients
     w = axisymmetric_wavelet_forward(L, noised_signal, axisymmetric_wavelets)
@@ -36,5 +46,4 @@ def denoising_axisym(
 
     # compute SNR
     compute_snr(signal, flm - signal)
-
     return flm
