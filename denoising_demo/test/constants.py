@@ -1,0 +1,6 @@
+B = 2
+J_MIN = 0
+L = 128
+N_SIGMA = 3
+SMOOTHING = 2
+SNR_IN = 10
