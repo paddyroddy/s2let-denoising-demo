@@ -13,6 +13,10 @@ def main() -> None:
     """Performs a denoising akin to figure 5 of the S2LET paper"""
     # read in command line arguments
     args = read_args()
+    logger.info(
+        f"parameters: L={args.bandlimit}, J0={args.jmin}, "
+        f"B={args.parameter}, SNR_IN={args.noise}, N_SIGMA={args.sigma}"
+    )
 
     # create initial smoothed Earth topography
     earth_flm = create_flm(args.bandlimit)
