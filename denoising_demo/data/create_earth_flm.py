@@ -1,25 +1,19 @@
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import pyssht as ssht
 from scipy import io as sio
 
-from denoising_demo.utils.smoothing import apply_gaussian_smoothing
-
 _file_location = Path(__file__).resolve()
 _matfile = _file_location.parent / "EGM2008_Topography_flms_L2190.mat"
 
 
-def create_flm(L: int, smoothing: Optional[int] = None) -> np.ndarray:
+def create_flm(L: int) -> np.ndarray:
     """The harmonic coefficients of the topography of the Earth are read in
-    and the missing values are filled in. Smoothing is optionally performed
-    on the data.
+    and the missing values are filled in
 
     Args:
         L (int): bandlimit of the data
-        smoothing (Optional[int], optional): the level of smoothing desired.
-        Defaults to None.
 
     Returns:
         np.ndarray: the harmonic coefficients of the data
@@ -37,9 +31,6 @@ def create_flm(L: int, smoothing: Optional[int] = None) -> np.ndarray:
 
     # don't take the full L, invert dataset as Earth backwards
     flm = flm[: L ** 2].conj()
-
-    if isinstance(smoothing, int):
-        flm = apply_gaussian_smoothing(flm, L, smoothing)
     return flm
 
 

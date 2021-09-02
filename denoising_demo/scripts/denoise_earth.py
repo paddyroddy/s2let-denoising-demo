@@ -15,7 +15,7 @@ def main() -> None:
     args = read_args()
 
     # create initial smoothed Earth topography
-    earth_flm = create_flm(args.bandlimit, smoothing=args.smoothing)
+    earth_flm = create_flm(args.bandlimit)
 
     # compute harmonic coefficients of the noise to create noised signal
     nlm = create_noise(args.bandlimit, earth_flm, args.noise)

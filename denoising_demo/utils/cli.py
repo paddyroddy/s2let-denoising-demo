@@ -5,7 +5,6 @@ from denoising_demo.utils.vars import (
     J_MIN_DEFAULT,
     L_DEFAULT,
     N_SIGMA_DEFAULT,
-    SMOOTHING_DEFAULT,
     SNR_IN_DEFAULT,
 )
 
@@ -43,16 +42,9 @@ def read_args() -> Namespace:
     )
     parser.add_argument(
         "--sigma",
-        "-si",
+        "-s",
         type=int,
         default=N_SIGMA_DEFAULT,
-    )
-    parser.add_argument(
-        "--smoothing",
-        "-sm",
-        type=int,
-        default=SMOOTHING_DEFAULT,
-        help="the scaling of the sigma in Gaussian smoothing of the Earth",
     )
     parser.add_argument(
         "--type",
