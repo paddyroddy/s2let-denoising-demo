@@ -1,6 +1,5 @@
 import numpy as np
 import pyssht as ssht
-from pys2sleplet.utils.vars import SAMPLING_SCHEME
 
 
 def boost_coefficient_resolution(flm: np.ndarray, boost: int) -> np.ndarray:
@@ -19,5 +18,8 @@ def invert_flm_boosted(
     boost = resolution ** 2 - L ** 2
     flm = boost_coefficient_resolution(flm, boost)
     return ssht.inverse(
-        flm, resolution, Reality=reality, Spin=spin, Method=SAMPLING_SCHEME
+        flm,
+        resolution,
+        Reality=reality,
+        Spin=spin,
     )

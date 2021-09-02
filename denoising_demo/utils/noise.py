@@ -5,7 +5,7 @@ import pyssht as ssht
 from numpy.random import default_rng
 
 from denoising_demo.utils.logger import logger
-from denoising_demo.utils.vars import RANDOM_SEED, SAMPLING_SCHEME
+from denoising_demo.utils.vars import RANDOM_SEED
 
 
 def _signal_power(signal: np.ndarray) -> float:
@@ -106,9 +106,15 @@ def harmonic_hard_thresholding(
     logger.info("begin harmonic hard thresholding")
     for j, coefficient in enumerate(wav_coeffs[1:]):
         logger.info(f"start Psi^{j + 1}/{len(wav_coeffs)-1}")
-        f = ssht.inverse(coefficient, L, Method=SAMPLING_SCHEME)
+        f = ssht.inverse(
+            coefficient,
+            L,
+        )
         f_thresholded = _perform_hard_thresholding(f, sigma_j[j], n_sigma)
-        wav_coeffs[j + 1] = ssht.forward(f_thresholded, L, Method=SAMPLING_SCHEME)
+        wav_coeffs[j + 1] = ssht.forward(
+            f_thresholded,
+            L,
+        )
     return wav_coeffs
 
 

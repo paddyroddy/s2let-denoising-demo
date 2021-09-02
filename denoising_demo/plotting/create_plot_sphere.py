@@ -21,7 +21,7 @@ from denoising_demo.utils.plotly_methods import (
     create_layout,
     create_tick_mark,
 )
-from denoising_demo.utils.vars import SAMPLING_SCHEME, UNSEEN
+from denoising_demo.utils.vars import UNSEEN
 
 _file_location = Path(__file__).resolve()
 _fig_path = _file_location.parents[1] / "figures"
@@ -46,7 +46,8 @@ class Plot:
 
         # get values from the setup
         x, y, z, f_plot, vmin, vmax = self._setup_plot(
-            f, self.resolution, method=SAMPLING_SCHEME
+            f,
+            self.resolution,
         )
 
         # appropriate zoom in on north pole

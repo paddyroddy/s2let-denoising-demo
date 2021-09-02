@@ -4,7 +4,6 @@ from denoising_demo.data.create_earth_flm import create_flm
 from denoising_demo.plotting.create_plot_sphere import Plot
 from denoising_demo.utils.denoising import denoising_axisym
 from denoising_demo.utils.noise import compute_snr, create_noise
-from denoising_demo.utils.vars import SAMPLING_SCHEME
 from denoising_demo.utils.wavelet_methods import create_axisymmetric_wavelets
 
 B = 2
@@ -42,7 +41,10 @@ def main() -> None:
     # produce three plots
     for name, flm in fields_dict.items():
         # convert to pixel space
-        field = ssht.inverse(flm, L, Method=SAMPLING_SCHEME)
+        field = ssht.inverse(
+            flm,
+            L,
+        )
 
         # perform plot
         Plot(

@@ -7,7 +7,6 @@ from denoising_demo.utils.noise import (
     harmonic_hard_thresholding,
 )
 from denoising_demo.utils.plot_methods import rotate_earth_to_south_america
-from denoising_demo.utils.vars import SAMPLING_SCHEME
 from denoising_demo.utils.wavelet_methods import (
     axisymmetric_wavelet_forward,
     axisymmetric_wavelet_inverse,
@@ -41,6 +40,9 @@ def denoising_axisym(
     flm_rot = rotate_earth_to_south_america(flm, L)
 
     # compute SNR
-    compute_snr(signal, flm - signal)
+    compute_snr(signal, flm_rot - signal)
 
-    return ssht.inverse(flm_rot, L, Method=SAMPLING_SCHEME)
+    return ssht.inverse(
+        flm_rot,
+        L,
+    )

@@ -8,7 +8,6 @@ from denoising_demo.utils.vars import (
     EARTH_ALPHA,
     EARTH_BETA,
     EARTH_GAMMA,
-    SAMPLING_SCHEME,
 )
 
 
@@ -64,5 +63,9 @@ def boost_field(
     """
     inverts and then boosts the field before plotting
     """
-    flm = ssht.forward(field, L, Reality=reality, Method=SAMPLING_SCHEME)
+    flm = ssht.forward(
+        field,
+        L,
+        Reality=reality,
+    )
     return invert_flm_boosted(flm, L, resolution, reality=reality)
