@@ -14,7 +14,7 @@ def read_args() -> Namespace:
     """Method to read arguments from the command line
 
     Returns:
-        Namespace: a argparse Namespace object
+        Namespace: an argparse Namespace object
     """
     parser = ArgumentParser(description="Create denoising plots")
     parser.add_argument(

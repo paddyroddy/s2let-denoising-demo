@@ -4,6 +4,7 @@ from denoising_demo.data.create_earth_flm import create_flm
 from denoising_demo.plotting.create_plot_sphere import Plot
 from denoising_demo.utils.cli import read_args
 from denoising_demo.utils.denoising import perform_denoising
+from denoising_demo.utils.logger import logger
 from denoising_demo.utils.noise import compute_snr, create_noise
 from denoising_demo.utils.wavelet_methods import create_axisymmetric_wavelets
 
@@ -42,6 +43,7 @@ def main() -> None:
         field = ssht.inverse(flm, args.bandlimit)
 
         # perform plot
+        logger.info(f"producing the '{name}' plot")
         Plot(field, args.bandlimit, name).execute()
 
 
