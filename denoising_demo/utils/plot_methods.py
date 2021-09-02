@@ -2,9 +2,14 @@ import numpy as np
 import pyssht as ssht
 from matplotlib import colors
 
-from denoising.utils.harmonic_methods import invert_flm_boosted
-from denoising.utils.logger import logger
-from denoising.utils.vars import EARTH_ALPHA, EARTH_BETA, EARTH_GAMMA, SAMPLING_SCHEME
+from denoising_demo.utils.harmonic_methods import invert_flm_boosted
+from denoising_demo.utils.logger import logger
+from denoising_demo.utils.vars import (
+    EARTH_ALPHA,
+    EARTH_BETA,
+    EARTH_GAMMA,
+    SAMPLING_SCHEME,
+)
 
 
 def calc_plot_resolution(L: int) -> int:

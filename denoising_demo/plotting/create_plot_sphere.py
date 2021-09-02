@@ -9,19 +9,19 @@ import pyssht as ssht
 from plotly.graph_objs import Figure, Surface
 from plotly.graph_objs.surface import Lighting
 
-from denoising.utils.plot_methods import (
+from denoising_demo.utils.plot_methods import (
     boost_field,
     calc_plot_resolution,
     convert_colourscale,
     create_plot_type,
 )
-from denoising.utils.plotly_methods import (
+from denoising_demo.utils.plotly_methods import (
     create_camera,
     create_colour_bar,
     create_layout,
     create_tick_mark,
 )
-from denoising.utils.vars import SAMPLING_SCHEME, UNSEEN
+from denoising_demo.utils.vars import SAMPLING_SCHEME, UNSEEN
 
 _file_location = Path(__file__).resolve()
 _fig_path = _file_location.parents[1] / "figures"

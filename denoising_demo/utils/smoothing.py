@@ -1,7 +1,7 @@
 import numpy as np
 import pyssht as ssht
 
-from denoising.utils.logger import logger
+from denoising_demo.utils.logger import logger
 
 
 def apply_gaussian_smoothing(

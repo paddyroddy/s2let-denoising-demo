@@ -1,9 +1,11 @@
+from typing import Union
+
 import numpy as np
 import pyssht as ssht
 from numpy.random import default_rng
 
-from denoising.utils.logger import logger
-from denoising.utils.vars import RANDOM_SEED
+from denoising_demo.utils.logger import logger
+from denoising_demo.utils.vars import RANDOM_SEED, SAMPLING_SCHEME
 
 
 def _signal_power(signal: np.ndarray) -> float:
@@ -83,3 +85,38 @@ def compute_sigma_noise(
         float: the standard deviation of the noise
     """
     return np.sqrt(10 ** (-snr_in / 10) * _signal_power(signal) / signal.shape[0])
+
+
+def compute_sigma_j(signal: np.ndarray, psi_j: np.ndarray, snr_in: int) -> np.ndarray:
+    """
+    compute sigma_j for wavelets used in denoising the signal
+    """
+    lm_axis = 1
+    sigma_noise = compute_sigma_noise(signal, snr_in)
+    wavelet_power = (np.abs(psi_j) ** 2).sum(axis=lm_axis)
+    return sigma_noise * np.sqrt(wavelet_power)
+
+
+def harmonic_hard_thresholding(
+    L: int, wav_coeffs: np.ndarray, sigma_j: np.ndarray, n_sigma: int
+) -> np.ndarray:
+    """
+    perform thresholding in harmonic space
+    """
+    logger.info("begin harmonic hard thresholding")
+    for j, coefficient in enumerate(wav_coeffs[1:]):
+        logger.info(f"start Psi^{j + 1}/{len(wav_coeffs)-1}")
+        f = ssht.inverse(coefficient, L, Method=SAMPLING_SCHEME)
+        f_thresholded = _perform_hard_thresholding(f, sigma_j[j], n_sigma)
+        wav_coeffs[j + 1] = ssht.forward(f_thresholded, L, Method=SAMPLING_SCHEME)
+    return wav_coeffs
+
+
+def _perform_hard_thresholding(
+    f: np.ndarray, sigma_j: Union[float, np.ndarray], n_sigma: int
+) -> np.ndarray:
+    """
+    set pixels in real space to zero if the magnitude is less than the threshold
+    """
+    threshold = n_sigma * sigma_j
+    return np.where(np.abs(f) < threshold, 0, f)

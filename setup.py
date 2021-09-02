@@ -1,7 +1,7 @@
 from setuptools import find_namespace_packages, setup
 
 setup(
-    name="denoising",
+    name="denoising_demo",
     version="0.1.0",
     author="Patrick Roddy",
     author_email="patrickjamesroddy@gmail.com",
@@ -9,7 +9,7 @@ setup(
     include_package_data=True,
     entry_points=dict(
         console_scripts=[
-            "demo=denoising.scripts.denoise_earth:main",
+            "demo=denoising_demo.scripts.denoise_earth:main",
         ],
     ),
 )
