@@ -44,7 +44,7 @@ def main() -> None:
 
         # perform plot
         logger.info(f"producing the '{name}' plot")
-        Plot(field, args.bandlimit, name).execute()
+        Plot(field, args.bandlimit, name, plot_type=args.type).execute()
 
 
 if __name__ == "__main__":
