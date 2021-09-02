@@ -20,7 +20,7 @@ def _signal_power(signal: np.ndarray) -> float:
     return (np.abs(signal) ** 2).sum()
 
 
-def compute_snr(signal: np.ndarray, noise: np.ndarray, signal_type: str) -> float:
+def compute_snr(signal: np.ndarray, noise: np.ndarray) -> float:
     """Computes the SNR of the input signal
 
     Args:

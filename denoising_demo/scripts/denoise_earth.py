@@ -29,7 +29,7 @@ def main() -> None:
     wavelets = create_axisymmetric_wavelets(L, B, J_MIN)
 
     # denoise Earth signal
-    denoised_earth_flm = denoising_axisym(
+    denoised_earth = denoising_axisym(
         L, earth_flm, noised_earth_flm, wavelets, SNR_IN, N_SIGMA
     )
 
@@ -37,7 +37,6 @@ def main() -> None:
     fields_dict = {
         "earth": earth_flm,
         "noised_earth": noised_earth_flm,
-        "denoised_earth": denoised_earth_flm,
     }
 
     # produce three plots
@@ -51,6 +50,9 @@ def main() -> None:
             L,
             name,
         ).execute()
+
+    # plot denoised Earth
+    Plot(denoised_earth, L, name).execute()
 
 
 if __name__ == "__main__":
