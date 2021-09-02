@@ -36,5 +36,5 @@ jobs:
 
             - name: Install package and run
               run: |
-                pip install .
+                pip install -e .
                 demo -h
