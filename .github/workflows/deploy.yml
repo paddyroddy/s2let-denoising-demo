@@ -28,9 +28,9 @@ jobs:
             - name: Install dependencies
               run: |
                   python -m pip install --upgrade pip
-                  sed  # TODO: remove - keeps requirements clean
-                    -e '/s2let/d'
-                    -e '/ssht/d'
+                  sed \ # TODO: remove - keeps requirements clean
+                    -e '/s2let/d' \
+                    -e '/ssht/d' \
                     -i requirements.txt
                   pip install -r requirements.txt
 
