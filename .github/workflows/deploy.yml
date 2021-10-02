@@ -28,10 +28,10 @@ jobs:
             - name: Install dependencies
               run: |
                   python -m pip install --upgrade pip
-                  sed
+                  sed  # TODO: remove - keeps requirements clean
                     -e '/ssht/d'
                     -e '/s2let/d'
-                    -i requirements.txt # TODO: remove
+                    -i requirements.txt
                   pip install -r requirements.txt
 
             # TODO: remove fix after packages updated
