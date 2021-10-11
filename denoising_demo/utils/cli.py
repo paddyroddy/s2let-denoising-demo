@@ -45,6 +45,7 @@ def read_args() -> Namespace:
         "-s",
         type=int,
         default=N_SIGMA_DEFAULT,
+        help="the n_sigma used in the thresholding",
     )
     parser.add_argument(
         "--type",
